@@ -1,0 +1,38 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../template.xhtml" xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<p:importEnum type="com.heroku.rafaelribeirofranco.model.enums.Finished"
+		var="Finished" allSuffix="ALL_ENUM_VALUES" />
+	<h:form id="lista">
+		<p:dataTable value="#{todoBean.todos}" var="todo" border="1">
+			<p:column>
+				<div>
+					<p:inputText class="editar" value="#{todo.assignment}"
+						rendered="#{todo.editing}" />
+					<p:outputLabel value="#{todo.assignment}"
+						rendered="#{not todo.editing}" />
+				</div>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{todo.finished}"
+					rendered="#{not todo.editing}" />
+				<p:selectOneMenu value="#{todo.finished}" rendered="#{todo.editing}" >
+					<f:selectItems value="#{Finished.ALL_ENUM_VALUES}" var="fin" itemValue="#{fin}" itemLabel="#{fin}" />
+				</p:selectOneMenu>
+			</p:column>
+
+			<p:column>
+				<p:commandButton value="Editar" action="#{todoBean.edit(todo)}"
+					rendered="#{not todo.editing}" update="lista" />
+				<p:commandButton value="X" action="#{todoBean.remover(todo)}"
+					rendered="#{not todo.editing}" update="lista" />
+
+			</p:column>
+		</p:dataTable>
+		<p:commandButton value="Salvar" actionListener="#{todoBean.editar}"
+			update="lista" />
+	</h:form>
+</ui:decorate>
