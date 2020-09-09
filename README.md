@@ -3,3 +3,4 @@ Banco de dados relacional Postgresql, Hibernate e Primefaces.
 
 A tela é auto explicativa. As requisições podem demorar de acordo com a
 quantidade de dados cadastrados no Banco.
+Foi utilizado para este projeto a IDE Eclipse e o server Tomcat. 
